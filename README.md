@@ -8,4 +8,8 @@ Interactive table of which professors grade above or below colleagues teaching t
   (monthly, whenever the notebook changes, or on demand from the Actions tab).
 - `index.html` – the page GitHub Pages serves.
 
-Averages reflect course mix, class size and who enrols. They are not a measure of teaching quality.
+Averages reflect course mix, class size and who enrols. 
+
+This is based of the data and built upon the footsteps of https://github.com/DonneyF/ubcgrades
+
+

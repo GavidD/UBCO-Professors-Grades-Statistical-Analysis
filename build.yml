@@ -1,0 +1,43 @@
+name: Build dashboard
+
+on:
+  workflow_dispatch:            # "Run workflow" button in the Actions tab
+  schedule:
+    - cron: "0 9 1 * *"         # 1st of every month, 09:00 UTC
+  push:
+    paths:
+      - "All_UBCO_Professors.ipynb"
+      - "requirements.txt"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: write               # lets the job commit the new index.html
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install packages
+        run: pip install -r requirements.txt
+
+      - name: Run the notebook (downloads data, writes index.html)
+        run: jupyter nbconvert --to notebook --execute --ExecutePreprocessor.timeout=3000 --output-dir "$RUNNER_TEMP" All_UBCO_Professors.ipynb
+
+      - name: Check the page was actually built
+        run: grep -q "const DATA" index.html
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html prof_comparison.csv
+          git diff --cached --quiet || git commit -m "Update dashboard"
+          git push

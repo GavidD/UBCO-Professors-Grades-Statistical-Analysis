@@ -1,0 +1,6 @@
+jupyter
+nbconvert
+ipykernel
+requests
+pandas
+numpy

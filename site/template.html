@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en" data-theme="dark" data-build="__BUILD__"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>gradegap: how grading differs between UBC professors</title>
+<meta name="description" content="Compare how UBC professors grade against colleagues teaching the same courses. Descriptive statistics from the UBCGrades data for UBC Okanagan and UBC Vancouver.">
+<link rel="icon" href="site/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website"><meta property="og:title" content="gradegap">
+<meta property="og:description" content="How grading differs between professors teaching the same course at UBC.">
+<meta property="og:url" content="__SITE__/"><meta property="og:image" content="__SITE__/site/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="site/styles.css?v=__BUILD__">
+</head>
+<body>
+<div class="wrap">
+<header>
+ <a class="mark serif" href="#top">gradegap</a>
+ <div class="nav">
+  <div class="seg" id="campus" role="group" aria-label="Campus"><button data-v="UBCO" aria-pressed="true">UBCO</button><button data-v="UBCV" aria-pressed="false">UBCV</button></div>
+  <div class="seg" id="mode" role="group" aria-label="Detail level"><button data-v="simple" aria-pressed="true">Simple</button><button data-v="adv" aria-pressed="false">Advanced</button></div>
+  <button class="tbtn" id="theme" aria-label="Switch colour theme">Light theme</button>
+  <span class="links"><a href="#how-to-read">How to read</a><a href="#about">About</a><a href="https://github.com/GavidD/UBCO-Professors-Grades-Statistical-Analysis" target="_blank" rel="noopener">GitHub</a></span>
+ </div>
+</header>
+<main id="top">
+<noscript><p class="intro">gradegap needs JavaScript to show the table.</p></noscript>
+<div class="intro">
+ <h1 class="serif">How grading differs between professors teaching the same course</h1>
+ <p>gradegap compares each professor's grade averages with those of other professors who taught the same courses at UBC. It is a statistics project, and a way to see how much the instructor can matter when you plan your courses.</p>
+ <p class="status" id="status"></p>
+</div>
+<div class="controls">
+ <div class="row1">
+  <div class="sbox"><input id="q" type="search" placeholder="Search professor, subject, or course" aria-label="Search"><kbd>/</kbd></div>
+  <select id="subj" aria-label="Subject"></select>
+ </div>
+ <div class="row2">
+  <div class="seg" id="dir" role="group" aria-label="Direction"><button data-v="all" aria-pressed="true">All</button><button data-v="above" aria-pressed="false">Above</button><button data-v="below" aria-pressed="false">Below</button></div>
+  <label class="chk"><input type="checkbox" id="clr"> Clear gaps only</label>
+  <label class="chk">Sort <select id="sort"></select></label>
+  <button class="tbtn" id="reset">Reset</button>
+ </div>
+</div>
+<div class="tablehead"><span class="count" id="count" aria-live="polite"></span><button class="tbtn" id="exp">Export CSV</button></div>
+<div class="scroll"><table id="tbl"><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+<div class="pager" id="pager"></div>
+
+<section class="doc" id="how-to-read">
+ <h2 class="serif">How to read the table</h2>
+ <p><b>Grades vs colleagues</b> (Diff) is the professor's average minus everyone else's average in the same courses, in percentage points, weighted by how many of the professor's students were in each course. The bar shows that number and the thin line is its 95% confidence interval. A <b>clear gap</b> means the interval excludes zero. Rows without one are drawn hollow and in grey.</p>
+ <div class="ex"><b>Worked example (fictional).</b> A professor taught Course A (120 students, average 74) and Course B (40 students, average 70). Colleagues averaged 71 in A and 68 in B, so the course differences are +3 and +2. Weighted by students: (3 × 120 + 2 × 40) ÷ 160 = +2.75 points.</div>
+ <p>With hundreds of professors, a handful will show a clear gap by chance alone. Treat extremes as leads, not verdicts.</p>
+</section>
+<section class="doc" id="about">
+ <h2 class="serif">About</h2>
+ <p>I'm David Goerzen, a physics student at the University of British Columbia's Okanagan campus. I created gradegap to examine how grading varies between professors teaching the same courses, and to understand whether the choice of instructor can meaningfully affect a student's GPA.</p>
+ <p>The code is open source under the MIT licence on <a href="https://github.com/GavidD/UBCO-Professors-Grades-Statistical-Analysis" target="_blank" rel="noopener">GitHub</a>. Found a mistake? <a href="https://github.com/GavidD/UBCO-Professors-Grades-Statistical-Analysis/issues" target="_blank" rel="noopener">Open an issue</a>.</p>
+ <p>Grade data comes from <a href="https://ubcgrades.com" target="_blank" rel="noopener">UBCGrades</a>, built by <a href="https://github.com/DonneyF/ubcgrades" target="_blank" rel="noopener">DonneyF</a>. Thank you.</p>__DATA_NOTES__
+ <p>gradegap is an independent project and is not affiliated with, endorsed by, or sponsored by the University of British Columbia.</p>
+</section>
+</main>
+<dialog id="pick" aria-labelledby="pt"><h2 id="pt" class="serif">Which campus?</h2><p>Pick the campus you want to explore. You can switch at any time with the toggle at the top of the page.</p><div class="pick"><button data-v="UBCO"><b>UBC Okanagan</b><span>Kelowna campus (UBCO)</span></button><button data-v="UBCV"><b>UBC Vancouver</b><span>Vancouver campus (UBCV)</span></button></div></dialog>
+<footer>MIT licence · © 2026 David Goerzen · <a href="__REPO__">Source on GitHub</a> · Built __BUILT__ · commit __COMMIT__</footer>
+</div>
+<script src="site/app.js?v=__BUILD__" defer></script></body></html>
